@@ -1,4 +1,4 @@
-package com.CatsProfile.cats;
+package com.catsprofile.cats;
 
 public class CatProfileCreateForm {
 
