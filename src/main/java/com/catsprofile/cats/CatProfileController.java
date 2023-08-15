@@ -26,9 +26,9 @@ public class CatProfileController {
 
     // クエリ文字を受け取れるようにする
     @GetMapping("/profiles3")
-    public String catName(
+    public Map<String, String> catName(
             @RequestParam String name) {
-        return "Lucca";
+        return Map.of("name", name);
     }
 
 
@@ -40,7 +40,6 @@ public class CatProfileController {
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(new ProfileCreateResponse("profile successfully created"));
-
     }
 
     @PatchMapping("/profiles/{id}")
