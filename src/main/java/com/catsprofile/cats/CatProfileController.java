@@ -2,13 +2,17 @@ package com.catsprofile.cats;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 public class CatProfileController {
 
-    /*@GetMapping("profiles1")
+    @GetMapping("profiles1")
     public List<String> getProfiles() {
         return List.of("Roku", "Tom", "Lucca", "Hinata", "Bungaku");
     }
@@ -37,7 +41,7 @@ public class CatProfileController {
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(new ProfileCreateResponse("profile successfully created"));
-    }*/
+    }
 
     @PatchMapping("/profiles/{id}")
     public ResponseEntity<Map<String, String>>
@@ -50,7 +54,6 @@ public class CatProfileController {
     public ResponseEntity<Map<String, CatProfileUpdateForm>>
     updateProfile(@PathVariable("id") int id,
                   @RequestBody CatProfileUpdateForm catProfileUpdateForm) {
-        CatProfileUpdateForm a = catProfileUpdateForm;
         return ResponseEntity.ok(Map.of("catProfile", catProfileUpdateForm));
     }
 
