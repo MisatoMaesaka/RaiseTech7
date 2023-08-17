@@ -1,4 +1,4 @@
-package com.CatsProfile.cats;
+package com.catsprofile.cats;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,26 +26,35 @@ public class CatProfileController {
 
     // クエリ文字を受け取れるようにする
     @GetMapping("/profiles3")
-    public String catName(
+    public Map<String, String> catName(
             @RequestParam String name) {
-        return "Lucca";
+        return Map.of("name", name);
     }
 
 
     @PostMapping("/profiles")
-    public ResponseEntity<ProfileCreateResponse> createProfile(@RequestBody CatProfileCreateForm catProfileCreateForm) {
+    public ResponseEntity<ProfileCreateResponse>
+    createProfile(@RequestBody CatProfileCreateForm catProfileCreateForm) {
 
         URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
                 .path("/profiles")
                 .build()
                 .toUri();
         return ResponseEntity.created(url).body(new ProfileCreateResponse("profile successfully created"));
-
     }
 
     @PatchMapping("/profiles/{id}")
-    public ResponseEntity<Map<String, String>> updateProfile(@PathVariable("id") int id, @RequestBody CatProfileUpdateForm catProfileUpdateForm) {
+    public ResponseEntity<Map<String, String>>
+    updateMessage(@PathVariable("id") int id,
+                  @RequestBody CatProfileUpdateForm catProfileUpdateFormMessage) {
         return ResponseEntity.ok(Map.of("message", "profile successfully updated"));
+    }
+
+    @PatchMapping("/catprofiles/{id}")
+    public ResponseEntity<Map<String, CatProfileUpdateForm>>
+    updateProfile(@PathVariable("id") int id,
+                  @RequestBody CatProfileUpdateForm catProfileUpdateForm) {
+        return ResponseEntity.ok(Map.of("catProfile", catProfileUpdateForm));
     }
 
     @DeleteMapping("/profiles/{id}")
